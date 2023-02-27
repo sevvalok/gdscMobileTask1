@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:untitled1/Screens/login.dart';
 
 ///
-import '../colors/color1.dart';
-import '../items/item1.dart';
+import '../../colors/color1.dart';
+import '../../items/item1.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    home: HomePage(),
+  runApp(const GetMaterialApp(
+    home: OnboardPage(),
   ));
 }
 
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class OnboardPage extends StatefulWidget {
+  const OnboardPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<OnboardPage> createState() => _OnboardPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _OnboardPageState extends State<OnboardPage> {
   PageController pageController = PageController(initialPage: 0);
   int currentIntdex = 0;
 
@@ -72,14 +73,23 @@ class _HomePageState extends State<HomePage> {
                                   child: Text(
                                     listOfItems[index].title,
                                     textAlign: TextAlign.center,
-                                    style: textTheme.headlineMedium,
+                                    style: const TextStyle(
+                                      fontFamily: 'Kalam',
+                                      fontSize: 30,
+                                      fontStyle: FontStyle.normal,
+                                      color: MyColors.buttonColor,
+                                    ),
                                   ),
                                 ),
 
                                 Text(
                                   listOfItems[index].subTitle,
                                   textAlign: TextAlign.center,
-                                  style: textTheme.headline6,
+                                  style: const TextStyle(
+                                      fontFamily: 'Kalam',
+                                    fontSize: 16,
+                                    fontStyle: FontStyle.italic,
+                                  ),
                                 ),
                               ],
                             ),
@@ -100,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                               dotHeight: 10.0,
                               expansionFactor: 3.9,
                               dotColor: Colors.grey,
-                              activeDotColor: MyColors.btnColor),
+                              activeDotColor: MyColors.buttonColor),
                           count: listOfItems.length,
                           controller: pageController,
                           onDotClicked: (newVal) {
@@ -139,13 +149,16 @@ class GetStartBTN extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+      Get.offAll(()=> const LoginScreen(),
+          transition: Transition.leftToRight);
+    },
       child: Container(
         margin: const EdgeInsets.only(top: 60, left: 200),
         width: size.width / 2.5,
         height: size.height / 15,
         decoration: BoxDecoration(
-          color: MyColors.btnColor,
+          color: MyColors.buttonColor,
           borderRadius: BorderRadius.circular(25),
         ),
         child: Center(
